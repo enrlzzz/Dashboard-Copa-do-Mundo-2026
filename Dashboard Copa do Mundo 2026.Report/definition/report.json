@@ -1,0 +1,130 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY26SU05",
+      "reportVersionAtImport": {
+        "visual": "2.9.0",
+        "report": "3.3.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "htmlContent443BE3AD55E043BF878BED274D3A6865",
+    "orgChart021B261450284A21B688B59A7342AC52"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY26SU05",
+          "path": "BaseThemes/CY26SU05.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "anterior_focalizar1172323029307506.png",
+          "path": "anterior_focalizar1172323029307506.png",
+          "type": "Image"
+        },
+        {
+          "name": "anterior_padrao9542951758017495.png",
+          "path": "anterior_padrao9542951758017495.png",
+          "type": "Image"
+        },
+        {
+          "name": "anterior_pressionar07125717400292442.png",
+          "path": "anterior_pressionar07125717400292442.png",
+          "type": "Image"
+        },
+        {
+          "name": "proximo_focalizar6605849605565991.png",
+          "path": "proximo_focalizar6605849605565991.png",
+          "type": "Image"
+        },
+        {
+          "name": "proximo_padrao9493145373587112.png",
+          "path": "proximo_padrao9493145373587112.png",
+          "type": "Image"
+        },
+        {
+          "name": "proximo_pressionar22758769850266292.png",
+          "path": "proximo_pressionar22758769850266292.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tela_de_Dados_Copa_do_Mundo2196466249698671.png",
+          "path": "Tela_de_Dados_Copa_do_Mundo2196466249698671.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tela_de_Dados_Copa_do_Mundo6908269399367596.png",
+          "path": "Tela_de_Dados_Copa_do_Mundo6908269399367596.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tela_de_Dados_Copa_do_Mundo7530279876702883.png",
+          "path": "Tela_de_Dados_Copa_do_Mundo7530279876702883.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tela_de_Dados_Copa_do_Mundo8390576681754336.png",
+          "path": "Tela_de_Dados_Copa_do_Mundo8390576681754336.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tela_de_Dados_Copa_do_Mundo9475382352821325.png",
+          "path": "Tela_de_Dados_Copa_do_Mundo9475382352821325.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true,
+    "customMemoryLimit": "1048576",
+    "customTimeoutLimit": "225"
+  }
+}

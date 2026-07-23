@@ -1,0 +1,143 @@
+table Fato_FaseFinal
+	lineageTag: 6b262324-510b-405d-87fe-538e57d7c83e
+
+	column Fase
+		dataType: string
+		lineageTag: 866fec10-eb03-4cdb-8446-7936fd465370
+		summarizeBy: none
+		sourceColumn: Fase
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a6eb40ac-2779-4326-97c5-2d02733e2cd9
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Local
+		dataType: string
+		lineageTag: c79de0f1-c347-492b-a849-b786714675c2
+		summarizeBy: none
+		sourceColumn: Local
+
+		annotation SummarizationSetBy = Automatic
+
+	column Confronto
+		dataType: string
+		lineageTag: 89f2d9b2-0c44-46d3-bf18-98fd6a494d23
+		summarizeBy: none
+		sourceColumn: Confronto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Placar
+		dataType: string
+		lineageTag: ecd0ebaa-2169-4b4b-a64b-fbb94584a7a6
+		summarizeBy: none
+		sourceColumn: Placar
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).1'
+		dataType: string
+		lineageTag: e1b96d5b-fb88-4f00-88d9-01f97b3d8e1c
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).2'
+		dataType: string
+		lineageTag: 03516664-a6c0-4020-b7c3-1d10682dc7ae
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).3'
+		dataType: string
+		lineageTag: 89d817ed-33e9-4220-8458-d8632c98761d
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).4'
+		dataType: string
+		lineageTag: 3bf0fbae-b42d-43bc-a238-e11007781217
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).5'
+		dataType: string
+		lineageTag: 813f94be-faf5-480a-a00c-1c64ec50294f
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).6'
+		dataType: string
+		lineageTag: 89c51d6e-0102-4f86-868c-ce375e1c8531
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).6
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).7'
+		dataType: string
+		lineageTag: 415d9183-c517-4ac5-8dbb-0e6a64848781
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).7
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).8'
+		dataType: string
+		lineageTag: 477c82a2-dafc-40b3-9195-7c2b17731fec
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).8
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).9'
+		dataType: string
+		lineageTag: 37e4c8ce-a8ea-4693-9116-996e9f39f836
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).9
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Gols (ordem cronológica).10'
+		dataType: string
+		lineageTag: 723a511f-e554-4361-aa58-ed3b06a4c113
+		summarizeBy: none
+		sourceColumn: Gols (ordem cronológica).10
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Fase Final - Detalhes' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Enrico\Geral\BI\Youtube\Power BI do ZERO ao Dashboard Completo\Aula 01\Copa do Mundo 2026.xlsx"), null, true),
+				    #"Fase Final - Detalhes_Sheet" = Fonte{[Item="Fase Final - Detalhes",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Fase Final - Detalhes_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Fase", type text}, {"Data", type date}, {"Local", type text}, {"Confronto", type text}, {"Placar", type text}, {"Gols (ordem cronológica)", type text}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado", "Gols (ordem cronológica)", Splitter.SplitTextByDelimiter("|", QuoteStyle.Csv), {"Gols (ordem cronológica).1", "Gols (ordem cronológica).2", "Gols (ordem cronológica).3", "Gols (ordem cronológica).4", "Gols (ordem cronológica).5", "Gols (ordem cronológica).6", "Gols (ordem cronológica).7", "Gols (ordem cronológica).8", "Gols (ordem cronológica).9", "Gols (ordem cronológica).10"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"Gols (ordem cronológica).1", type text}, {"Gols (ordem cronológica).2", type text}, {"Gols (ordem cronológica).3", type text}, {"Gols (ordem cronológica).4", type text}, {"Gols (ordem cronológica).5", type text}, {"Gols (ordem cronológica).6", type text}, {"Gols (ordem cronológica).7", type text}, {"Gols (ordem cronológica).8", type text}, {"Gols (ordem cronológica).9", type text}, {"Gols (ordem cronológica).10", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

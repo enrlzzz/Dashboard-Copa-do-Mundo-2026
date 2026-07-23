@@ -1,0 +1,22 @@
+relationship Cal_Jogos
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fato_Jogos.Data
+	toColumn: Dim_Calendario.Data
+
+relationship Cal_FaseFinal
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fato_FaseFinal.Data
+	toColumn: Dim_Calendario.Data
+
+relationship Selecao_Artilheiros
+	fromColumn: Fato_Artilheiros.Seleção
+	toColumn: Dim_Selecao.Seleção
+
+relationship Selecao_Premiacoes
+	fromColumn: Fato_Premiacoes.Seleção
+	toColumn: Dim_Selecao.Seleção
+
+relationship Fase_Jogos
+	fromColumn: Fato_Jogos.Fase
+	toColumn: Dim_Fase.Fase
+

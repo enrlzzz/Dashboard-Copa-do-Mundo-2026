@@ -1,0 +1,51 @@
+table Fato_Premiacoes
+	lineageTag: 10cfc1c3-2e32-4834-98a6-6dd5c087b227
+
+	column Prêmio
+		dataType: string
+		lineageTag: 7dcc16d4-e6b9-44ac-95ef-0a66e78629bf
+		summarizeBy: none
+		sourceColumn: Prêmio
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jogador
+		dataType: string
+		lineageTag: 9035c453-17aa-4ec4-a339-a5a41392ec75
+		summarizeBy: none
+		sourceColumn: Jogador
+
+		annotation SummarizationSetBy = Automatic
+
+	column Seleção
+		dataType: string
+		lineageTag: 29fdca7a-7670-4ac4-8fa5-0e83b97c7c74
+		summarizeBy: none
+		sourceColumn: Seleção
+
+		annotation SummarizationSetBy = Automatic
+
+	column Detalhe
+		dataType: string
+		lineageTag: 4cbbbf3f-4434-4ece-a772-bca00ff52f43
+		summarizeBy: none
+		sourceColumn: Detalhe
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Premiações = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Enrico\Geral\BI\Youtube\Power BI do ZERO ao Dashboard Completo\Aula 01\Copa do Mundo 2026.xlsx"), null, true),
+				    Premiações_Sheet = Fonte{[Item="Premiações",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Premiações_Sheet,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}, {"Column4", type text}}),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Tipo Alterado", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Prêmio", type text}, {"Jogador", type text}, {"Seleção", type text}, {"Detalhe", type text}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

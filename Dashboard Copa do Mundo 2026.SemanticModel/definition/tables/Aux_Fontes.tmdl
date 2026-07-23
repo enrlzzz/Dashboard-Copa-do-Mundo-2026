@@ -1,0 +1,26 @@
+table Aux_Fontes
+	lineageTag: 31173e90-c90f-4a7a-9e66-2f1c09e37434
+
+	column Fontes
+		dataType: string
+		lineageTag: f3306a80-aac9-4750-bc76-de84b142efbe
+		summarizeBy: none
+		sourceColumn: Fontes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fontes = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Enrico\Geral\BI\Youtube\Power BI do ZERO ao Dashboard Completo\Aula 01\Copa do Mundo 2026.xlsx"), null, true),
+				    Fontes_Sheet = Fonte{[Item="Fontes",Kind="Sheet"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fontes_Sheet,{{"Column1", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"Column1", "Fontes"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

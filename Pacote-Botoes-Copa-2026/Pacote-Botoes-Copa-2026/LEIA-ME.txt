@@ -1,0 +1,26 @@
+PACOTE DE BOTOES — FIFA WORLD CUP 2026
+=======================================
+
+Sistema de botoes para o painel de BI da Copa do Mundo 2026.
+
+ESTRUTURA
+  01_botoes/         botoes de acao (apresentar, exportar, filtros, galeria, inicio, limpar, sumario)
+  02_navegacao/      anterior, proximo (circulares) e paginacao
+  03_chips_toggles/  chip PREMIUM e toggle R$/KG
+  05_sheets/         contact sheets (visao geral)
+  06_tokens/         paleta de cores e tipografia
+  07_fechar/         botao fechar (circular)
+
+ESTADOS
+  padrao · focalizar · pressionar · desabilitado
+
+PALETA
+  Navy #14213F · Navy Claro #22345F · Navy Esc. #0E1830
+  Ouro #D4A537 · Ouro Hi #EDC45E · Creme #F4EFE3
+  Vermelho #C0202B · Slate #6A789F
+
+TIPOGRAFIA
+  Titulo: Playfair Display 800
+  Label/Numeral: Space Mono 700 / 400
+
+Todos os PNGs em 2x com fundo transparente.

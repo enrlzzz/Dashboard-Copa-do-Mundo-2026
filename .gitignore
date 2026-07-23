@@ -1,0 +1,35 @@
+# === Power BI / PBIP: arquivos locais e sensíveis ===
+# localSettings.json guarda securityBindingsSignature (credenciais cifradas) e IDs de workspace
+**/.pbi/localSettings.json
+# cache de dados do modelo (binário, pesado, some do diff)
+**/.pbi/cache.abf
+# preferências locais do editor
+**/.pbi/editorSettings.json
+
+# === Backups e artefatos gerados ===
+*.backup-*/
+*.backup-*
+*.pbix
+*.pbit
+*.abf
+
+# === Temporários do Excel / Office ===
+~$*.xlsx
+~$*.xls
+~$*.docx
+*.tmp
+
+# === Lixo de sistema operacional ===
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# === Editores ===
+.vscode/
+.idea/
+
+# === Rascunhos e documentos locais (não vão para o repositório) ===
+Copa2026_Post_LinkedIn*.md
+Copa2026_Documentacao_Dashboard.md

@@ -1,0 +1,24 @@
+table Dim_Fase
+	lineageTag: 58951ddf-5e66-4ab7-ae63-9fa720e2c867
+
+	column Fase
+		lineageTag: 426c500d-a511-4680-8ee5-9000b86a36d2
+		isNameInferred
+		sourceColumn: Fato_Jogos[Fase]
+		sortByColumn: 'Ordem Fase'
+
+	column 'Ordem Fase'
+		isHidden
+		lineageTag: 337cc052-dd34-44ae-802e-ba70d4ef9963
+		isNameInferred
+		sourceColumn: [Ordem Fase]
+
+	column 'Grupo Fase'
+		lineageTag: 36487b8f-4bc4-4c39-92d7-187de45adf51
+		isNameInferred
+		sourceColumn: [Grupo Fase]
+
+	partition Dim_Fase = calculated
+		mode: import
+		source = ADDCOLUMNS(DISTINCT('Fato_Jogos'[Fase]), "Ordem Fase", SWITCH(TRUE(), 'Fato_Jogos'[Fase] = "Fase de Grupos - Rodada 1", 1, 'Fato_Jogos'[Fase] = "Fase de Grupos - Rodada 2", 2, 'Fato_Jogos'[Fase] = "Fase de Grupos - Rodada 3", 3, 'Fato_Jogos'[Fase] = "Oitavos de Final (32)", 4, 'Fato_Jogos'[Fase] = "Oitavas de Final", 5, 'Fato_Jogos'[Fase] = "Quartas de Final", 6, 'Fato_Jogos'[Fase] = "Semifinal", 7, 'Fato_Jogos'[Fase] = "Disputa de 3º Lugar", 8, 'Fato_Jogos'[Fase] = "Final", 9, 99), "Grupo Fase", IF(CONTAINSSTRING('Fato_Jogos'[Fase], "Grupos"), "Fase de Grupos", "Mata-mata"))
+

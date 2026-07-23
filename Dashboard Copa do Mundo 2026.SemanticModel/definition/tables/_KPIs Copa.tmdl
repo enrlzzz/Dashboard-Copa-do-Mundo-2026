@@ -1,0 +1,543 @@
+table '_KPIs Copa'
+	lineageTag: de95ca4e-9815-44b4-b301-c35ca2e5d50a
+
+	measure HTMLC_Capa_KPIs = ```
+			
+			
+			// ╔══════════════════════════════════════════════════════════════════╗
+			// ║  BLOCO CONFIG  —  altere apenas daqui ate "FIM CONFIG"            ║
+			// ╚══════════════════════════════════════════════════════════════════╝
+			
+			
+			// --- 1. TEMA (design tokens) -> trocar a marca = trocar estes hex ---
+			VAR _C_Primaria = "#1A2A5E"   // navy (valor dos cards)
+			VAR _C_Accent   = "#C8A24B"   // dourado (destaque)
+			VAR _C_Sucesso  = "#A01E28"   // vermelho (apoio)
+			VAR _C_Texto    = "#1A2A5E"   // navy (texto do titulo)
+			
+			// --- 2. CARDS (Titulo / Valor=medida / Subtexto / Tag) ---
+			// Troque apenas as MEDIDAS na coluna "_Valor" e os textos.
+			VAR _Card1_Titulo = "TOTAL DE JOGOS"
+			VAR _Card1_Valor  = FORMAT([# Jogos], "#,##0")
+			VAR _Card1_Sub    = "partidas na competição"
+			VAR _Card1_Tag    = "48 seleções"
+			
+			VAR _Card2_Titulo = "TOTAL DE GOLS"
+			VAR _Card2_Valor  = FORMAT([# Gols], "#,##0")
+			VAR _Card2_Sub    = "gols marcados"
+			VAR _Card2_Tag    = "sem pênaltis"
+			
+			VAR _Card3_Titulo = "MÉDIA GOLS/JOGO"
+			VAR _Card3_Valor  = FORMAT([AVG Gols por Jogo], "0.00")
+			VAR _Card3_Sub    = "gols por partida"
+			VAR _Card3_Tag    = "ataque"
+			
+			VAR _Card4_Titulo = "ARTILHEIRO"
+			VAR _Card4_Valor  = [Artilheiro Líder]
+			VAR _Card4_Sub    = [Seleção do Líder] & " · " & FORMAT([Gols do Líder], "0") & " gols"
+			VAR _Card4_Tag    = "chuteira de ouro"
+			
+			VAR _Card5_Titulo = "CAMPEÃO"
+			VAR _Card5_Valor  = [Campeão]
+			VAR _Card5_Sub    = "campeã mundial 2026"
+			VAR _Card5_Tag    = "título"
+			
+			// ──────────────────────────────  FIM CONFIG  ──────────────────────────────
+			
+			
+			// ╔══════════════════════════════════════════════════════════════════╗
+			// ║  MOTOR  —  nao precisa editar para trocar de fornecedor           ║
+			// ╚══════════════════════════════════════════════════════════════════╝
+			
+			// tokens injetados como CSS custom properties no elemento raiz
+			VAR _Tokens =
+			    "--c-primaria:" & _C_Primaria & ";" &
+			    "--c-accent:"   & _C_Accent   & ";" &
+			    "--c-sucesso:"  & _C_Sucesso  & ";" &
+			    "--c-texto:"    & _C_Texto    & ";"
+			
+			VAR _Card =
+			    "" // helper conceitual; cards montados inline abaixo
+			
+			RETURN
+			"<div class='mmt-page-overlay' style='" & _Tokens & "'>
+			<style>
+			.mmt-page-overlay,.mmt-page-overlay *{box-sizing:border-box;margin:0;padding:0;}
+			.mmt-page-overlay{position:relative;width:100%;height:852px;min-height:852px;background:transparent;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;}
+			.mmt-title-block{position:absolute;top:28px;left:58px;z-index:5;max-width:620px;pointer-events:none;}
+			.mmt-eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:10px;font-size:10px;font-weight:800;letter-spacing:3.4px;text-transform:uppercase;color:rgba(112,68,52,0.62);}
+			.mmt-eyebrow:before{content:'';width:34px;height:1px;background:linear-gradient(90deg,var(--c-primaria),var(--c-accent),var(--c-sucesso));opacity:.75;}
+			.mmt-premium-title{position:relative;display:inline-block;font-size:56px;line-height:.98;font-weight:650;letter-spacing:-2.2px;color:var(--c-texto);text-shadow:0 1px 0 rgba(255,255,255,0.86),0 10px 24px rgba(58,31,23,0.12);}
+			.mmt-premium-title:after{content:'';position:absolute;left:2px;bottom:-13px;width:210px;height:4px;border-radius:99px;background:linear-gradient(90deg,var(--c-primaria) 0%,var(--c-accent) 48%,var(--c-sucesso) 100%);box-shadow:0 8px 20px rgba(239,92,137,0.18);}
+			.mmt-flavors{margin-top:27px;display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(112,68,52,0.72);background:rgba(255,255,255,0.44);border:1px solid rgba(255,255,255,0.70);box-shadow:0 12px 30px rgba(112,68,52,0.07),inset 0 1px 0 rgba(255,255,255,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+			.mmt-kpi-area{position:absolute;left:54px;right:54px;bottom:26px;z-index:4;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+			.mmt-card{position:relative;min-height:118px;padding:18px 20px 16px 20px;border-radius:26px;overflow:hidden;background:linear-gradient(145deg,rgba(255,255,255,0.78) 0%,rgba(255,248,244,0.50) 48%,rgba(255,255,255,0.34) 100%);border:1px solid rgba(255,255,255,0.78);box-shadow:0 18px 42px rgba(92,54,37,0.12),inset 0 1px 0 rgba(255,255,255,0.95),inset 0 -1px 0 rgba(120,70,50,0.05);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);}
+			.mmt-card:before{content:'';position:absolute;inset:-1px;border-radius:26px;padding:1px;background:linear-gradient(135deg,var(--c-accent),var(--c-sucesso),var(--c-primaria));opacity:.4;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;}
+			.mmt-card:after{content:'';position:absolute;right:-36px;bottom:-38px;width:112px;height:112px;border-radius:999px;background:radial-gradient(circle,rgba(239,92,137,0.22) 0%,rgba(239,92,137,0.08) 42%,transparent 70%);pointer-events:none;}
+			.mmt-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;}
+			.mmt-title{font-size:10px;letter-spacing:2.4px;text-transform:uppercase;font-weight:800;color:rgba(108,70,52,0.72);white-space:nowrap;}
+			.mmt-dot{width:9px;height:9px;border-radius:99px;background:linear-gradient(135deg,var(--c-accent),var(--c-sucesso));box-shadow:0 0 16px rgba(239,92,137,0.42);flex:0 0 auto;}
+			.mmt-value{position:relative;z-index:2;font-size:30px;line-height:1;font-weight:800;letter-spacing:-1px;color:var(--c-primaria);margin-bottom:9px;}
+			.mmt-sub{position:relative;z-index:2;font-size:12px;font-weight:600;color:rgba(108,70,52,0.58);margin-bottom:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+			.mmt-tag{position:relative;z-index:2;display:inline-flex;align-items:center;width:auto;max-width:100%;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--c-primaria);background:rgba(255,255,255,0.50);border:1px solid rgba(255,255,255,0.72);box-shadow:inset 0 1px 0 rgba(255,255,255,0.88);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+			</style>
+			
+			<div class='mmt-kpi-area'>
+			    <div class='mmt-card'><div class='mmt-top'><div class='mmt-title'>" & _Card1_Titulo & "</div><div class='mmt-dot'></div></div><div class='mmt-value'>" & _Card1_Valor & "</div><div class='mmt-sub'>" & _Card1_Sub & "</div><div class='mmt-tag'>" & _Card1_Tag & "</div></div>
+			    <div class='mmt-card'><div class='mmt-top'><div class='mmt-title'>" & _Card2_Titulo & "</div><div class='mmt-dot'></div></div><div class='mmt-value'>" & _Card2_Valor & "</div><div class='mmt-sub'>" & _Card2_Sub & "</div><div class='mmt-tag'>" & _Card2_Tag & "</div></div>
+			    <div class='mmt-card'><div class='mmt-top'><div class='mmt-title'>" & _Card3_Titulo & "</div><div class='mmt-dot'></div></div><div class='mmt-value'>" & _Card3_Valor & "</div><div class='mmt-sub'>" & _Card3_Sub & "</div><div class='mmt-tag'>" & _Card3_Tag & "</div></div>
+			    <div class='mmt-card'><div class='mmt-top'><div class='mmt-title'>" & _Card4_Titulo & "</div><div class='mmt-dot'></div></div><div class='mmt-value'>" & _Card4_Valor & "</div><div class='mmt-sub'>" & _Card4_Sub & "</div><div class='mmt-tag'>" & _Card4_Tag & "</div></div>
+			    <div class='mmt-card'><div class='mmt-top'><div class='mmt-title'>" & _Card5_Titulo & "</div><div class='mmt-dot'></div></div><div class='mmt-value'>" & _Card5_Valor & "</div><div class='mmt-sub'>" & _Card5_Sub & "</div><div class='mmt-tag'>" & _Card5_Tag & "</div></div>
+			</div>
+			</div>"
+			
+			```
+		lineageTag: a0444288-fe72-4332-aa58-ad51ec722cbe
+
+	measure hoje = TODAY()
+		formatString: Short Date
+		lineageTag: 8d6662d7-edae-4a6a-abd0-91f36bba2c6c
+
+	/// Quantidade de partidas disputadas na Copa 2026 no contexto atual.
+	measure '# Jogos' = COUNTROWS('Fato_Jogos')
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: f0c64af0-d2ab-4c72-bbfd-51634a947466
+
+	/// Total de gols marcados nas partidas (sem contar pênaltis de desempate).
+	measure '# Gols' = SUM('Fato_Jogos'[Total de Gols])
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: eee82663-93c0-4dc5-92d2-60c03827ef21
+
+	/// Quantidade de seleções participantes.
+	measure '# Seleções' = COUNTROWS('Dim_Selecao')
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: be678b48-6ca5-4603-a81a-7b8f11872451
+
+	/// Quantidade de estádios/sedes que receberam jogos.
+	measure '# Sedes' = DISTINCTCOUNT('Fato_Jogos'[Local])
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: 6de8c17b-a308-4a60-8585-5bf4c5c89deb
+
+	/// Quantidade de prêmios/reconhecimentos do torneio.
+	measure '# Prêmios' = COUNTROWS('Fato_Premiacoes')
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: c2bf61ec-236b-4e64-80d0-abf5cd4b3b53
+
+	/// Quantidade de jogadores na lista de artilheiros.
+	measure '# Artilheiros' = COUNTROWS('Fato_Artilheiros')
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: 100236f5-5b16-4645-985c-33fd8b6b9a64
+
+	/// Soma dos gols marcados pelos jogadores da lista de artilheiros.
+	measure '# Gols dos Artilheiros' = SUM('Fato_Artilheiros'[Gols])
+		formatString: #,##0
+		displayFolder: _Bases
+		lineageTag: b316c6d5-196c-423e-b776-d3d3c09ef634
+
+	/// Média de gols por partida (total de gols dividido pelo número de jogos).
+	measure 'AVG Gols por Jogo' = DIVIDE([# Gols], [# Jogos])
+		formatString: 0.00
+		displayFolder: _Razões
+		lineageTag: 50aba9c0-a6b9-40e4-b36d-6578f6b5e7ce
+
+	/// Maior diferença de gols registrada em uma única partida.
+	measure 'Maior Goleada' = MAXX('Fato_Jogos', ABS('Fato_Jogos'[Gols Mandante] - 'Fato_Jogos'[Gols Visitante]))
+		formatString: 0
+		displayFolder: _Razões
+		lineageTag: 51c3899b-f221-4526-b454-40e9c45270e9
+
+	/// Maior quantidade de gols somados em uma única partida.
+	measure 'Maior Nº de Gols em 1 Jogo' = MAXX('Fato_Jogos', 'Fato_Jogos'[Total de Gols])
+		formatString: 0
+		displayFolder: _Razões
+		lineageTag: 8e5d92d0-d205-4e51-bf27-a0001fc1424c
+
+	/// Percentual de jogos que ocorreram na fase de mata-mata.
+	measure '% Jogos Mata-mata' = DIVIDE(CALCULATE([# Jogos], 'Dim_Fase'[Grupo Fase] = "Mata-mata"), [# Jogos])
+		formatString: 0.0%
+		displayFolder: _Razões
+		lineageTag: bdd14e3e-7feb-40ea-bbfe-fa5f6f9c533c
+
+	/// Nome do(s) jogador(es) com mais gols no contexto atual (artilheiro líder).
+	measure 'Artilheiro Líder' = VAR _t = TOPN(1, SUMMARIZE('Fato_Artilheiros', 'Fato_Artilheiros'[Jogador]), CALCULATE(SUM('Fato_Artilheiros'[Gols])), DESC) RETURN CONCATENATEX(_t, 'Fato_Artilheiros'[Jogador], ", ")
+		displayFolder: _Rankings
+		lineageTag: b15eff49-46c6-4bec-beb1-72bd35227e6d
+
+	/// Quantidade de gols do artilheiro líder.
+	measure 'Gols do Líder' = MAXX(VALUES('Fato_Artilheiros'[Jogador]), CALCULATE(SUM('Fato_Artilheiros'[Gols])))
+		formatString: 0
+		displayFolder: _Rankings
+		lineageTag: b1fdf3c1-19aa-443b-ad7e-34554c56ba68
+
+	/// Seleção do artilheiro líder.
+	measure 'Seleção do Líder' = VAR _t = TOPN(1, SUMMARIZE('Fato_Artilheiros', 'Fato_Artilheiros'[Jogador], 'Fato_Artilheiros'[Seleção]), CALCULATE(SUM('Fato_Artilheiros'[Gols])), DESC) RETURN CONCATENATEX(_t, 'Fato_Artilheiros'[Seleção], ", ")
+		displayFolder: _Rankings
+		lineageTag: 99de53b3-94dc-45ed-bb7e-a3529c5b8435
+
+	/// Seleção campeã da Copa 2026 (via tabela de Premiações).
+	measure Campeão = CALCULATE(SELECTEDVALUE('Fato_Premiacoes'[Seleção]), FILTER(ALL('Fato_Premiacoes'), CONTAINSSTRING('Fato_Premiacoes'[Prêmio], "Campeão") && NOT CONTAINSSTRING('Fato_Premiacoes'[Prêmio], "Vice")))
+		displayFolder: _Rankings
+		lineageTag: 37667103-115a-4038-a9e0-6a750feb6000
+
+	/// Seleção que mais marcou gols somando jogos como mandante e visitante.
+	measure 'Seleção + Goleadora' = VAR _tbl = ADDCOLUMNS(VALUES('Dim_Selecao'[Seleção]), "@Gols", VAR _s = 'Dim_Selecao'[Seleção] RETURN SUMX(FILTER(ALL('Fato_Jogos'), 'Fato_Jogos'[Mandante] = _s), 'Fato_Jogos'[Gols Mandante]) + SUMX(FILTER(ALL('Fato_Jogos'), 'Fato_Jogos'[Visitante] = _s), 'Fato_Jogos'[Gols Visitante])) VAR _top = TOPN(1, _tbl, [@Gols], DESC) RETURN CONCATENATEX(_top, 'Dim_Selecao'[Seleção], ", ")
+		displayFolder: _Rankings
+		lineageTag: c001123c-9826-47e6-84a9-ca00ea7c3beb
+
+	/// Quantidade de gols da seleção mais goleadora.
+	measure 'Gols da + Goleadora' = VAR _tbl = ADDCOLUMNS(VALUES('Dim_Selecao'[Seleção]), "@Gols", VAR _s = 'Dim_Selecao'[Seleção] RETURN SUMX(FILTER(ALL('Fato_Jogos'), 'Fato_Jogos'[Mandante] = _s), 'Fato_Jogos'[Gols Mandante]) + SUMX(FILTER(ALL('Fato_Jogos'), 'Fato_Jogos'[Visitante] = _s), 'Fato_Jogos'[Gols Visitante])) RETURN MAXX(_tbl, [@Gols])
+		formatString: 0
+		displayFolder: _Rankings
+		lineageTag: 1f6e32b5-69e8-4d61-9b23-8fe42a9e51e2
+
+	measure HTML_Sumario_Dinamico = ```
+			
+			/*
+			=========================================================
+			CONFIGURAÇÃO DE PALETA
+			Troque apenas os códigos HEX abaixo para adaptar por fornecedor.
+			
+			Exemplos:
+			My Motto:
+			CorMarca        = "#6F4537"
+			CorDestaque     = "#D2477A"
+			CorApoio        = "#547849"
+			
+			Mondelez:
+			CorMarca        = "#A40E1A"
+			CorDestaque     = "#C89A4B"
+			CorApoio        = "#6A3B26"
+			
+			Milka / Mondelez:
+			CorMarca        = "#4B338C"
+			CorDestaque     = "#8C6FD1"
+			CorApoio        = "#C8B6E8"
+			
+			Mondelez:
+			CorMarca        = "#B51622"
+			CorDestaque     = "#D9A21B"
+			CorApoio        = "#496B34"
+			
+			Nutty Bavarian:
+			CorMarca        = "#0F4B2E"
+			CorDestaque     = "#C98A18"
+			CorApoio        = "#B51622"
+			=========================================================
+			*/
+			
+			VAR CorMarca = "#DA291C"
+			VAR CorDestaque = "#E3A52A"
+			VAR CorApoio = "#F0DDB0"
+			VAR CorTexto = "#3A2417"
+			VAR CorTextoSuave = "#8A6A45"
+			VAR CorLinha = "#EADBC2"
+			VAR CorPontoNeutro = "#F6ECD8"
+			VAR CorFundo = "transparent"
+			
+			/*
+			=========================================================
+			CONFIGURAÇÃO GERAL DO SUMÁRIO
+			=========================================================
+			*/
+			
+			VAR RotuloSuperior = "PANORAMA PÓS COPA"
+			VAR Edicao = "EDIÇÃO N° 01"
+			VAR MesAno = "JULHO 2026"
+			
+			/*
+			=========================================================
+			TÓPICOS DO SUMÁRIO
+			Para esconder algum item, deixe o título vazio:
+			VAR Topico11_Titulo = ""
+			=========================================================
+			*/
+			
+			VAR Topico01_Numero = "I"
+			VAR Topico01_Titulo = "Capa"
+			VAR Topico01_Cor = CorMarca
+			
+			VAR Topico02_Numero = "II"
+			VAR Topico02_Titulo = "Sumário"
+			VAR Topico02_Cor = CorApoio
+			
+			VAR Topico03_Numero = "III"
+			VAR Topico03_Titulo = "Artilheiros"
+			VAR Topico03_Cor = CorPontoNeutro
+			
+			VAR Topico04_Numero = "IV"
+			VAR Topico04_Titulo = "Todos os Jogos"
+			VAR Topico04_Cor = CorPontoNeutro
+			
+			VAR Topico05_Numero = "V"
+			VAR Topico05_Titulo = "Premiações"
+			VAR Topico05_Cor = CorPontoNeutro
+			
+			
+			
+			/*
+			=========================================================
+			CÁLCULO AUTOMÁTICO DE QUANTIDADE E LINHAS
+			=========================================================
+			*/
+			
+			VAR TotalItens =
+			    IF(Topico01_Titulo <> "", 1, 0) +
+			    IF(Topico02_Titulo <> "", 1, 0) +
+			    IF(Topico03_Titulo <> "", 1, 0) +
+			    IF(Topico04_Titulo <> "", 1, 0) +
+			    IF(Topico05_Titulo <> "", 1, 0) 
+			    
+			
+			VAR QtdeLinhas = MAX(1, ROUNDUP(DIVIDE(TotalItens, 2), 0))
+			
+			VAR GapLinhas =
+			    SWITCH(
+			        TRUE(),
+			        TotalItens <= 10, "22px",
+			        TotalItens <= 14, "14px",
+			        TotalItens <= 18, "9px",
+			        "6px"
+			    )
+			
+			/*
+			=========================================================
+			HTML DOS ITENS
+			=========================================================
+			*/
+			
+			VAR Item01 =
+			    IF(
+			        Topico01_Titulo <> "",
+			        "<div class='sum-item'>
+			            <div class='sum-num'>" & Topico01_Numero & "</div>
+			            <div class='sum-title'>" & Topico01_Titulo & "</div>
+			            <div class='sum-dot' style='background:" & Topico01_Cor & ";'></div>
+			        </div>",
+			        ""
+			    )
+			
+			VAR Item02 =
+			    IF(
+			        Topico02_Titulo <> "",
+			        "<div class='sum-item'>
+			            <div class='sum-num'>" & Topico02_Numero & "</div>
+			            <div class='sum-title'>" & Topico02_Titulo & "</div>
+			            <div class='sum-dot' style='background:" & Topico02_Cor & ";'></div>
+			        </div>",
+			        ""
+			    )
+			
+			VAR Item03 =
+			    IF(
+			        Topico03_Titulo <> "",
+			        "<div class='sum-item'>
+			            <div class='sum-num'>" & Topico03_Numero & "</div>
+			            <div class='sum-title'>" & Topico03_Titulo & "</div>
+			            <div class='sum-dot' style='background:" & Topico03_Cor & ";'></div>
+			        </div>",
+			        ""
+			    )
+			
+			VAR Item04 =
+			    IF(
+			        Topico04_Titulo <> "",
+			        "<div class='sum-item'>
+			            <div class='sum-num'>" & Topico04_Numero & "</div>
+			            <div class='sum-title'>" & Topico04_Titulo & "</div>
+			            <div class='sum-dot' style='background:" & Topico04_Cor & ";'></div>
+			        </div>",
+			        ""
+			    )
+			
+			VAR Item05 =
+			    IF(
+			        Topico05_Titulo <> "",
+			        "<div class='sum-item'>
+			            <div class='sum-num'>" & Topico05_Numero & "</div>
+			            <div class='sum-title'>" & Topico05_Titulo & "</div>
+			            <div class='sum-dot' style='background:" & Topico05_Cor & ";'></div>
+			        </div>",
+			        ""
+			    )
+			
+			
+			
+			
+			RETURN
+			"
+			<style>
+			html,
+			body{
+			    margin:0 !important;
+			    padding:0 !important;
+			    background:transparent !important;
+			    overflow:hidden !important;
+			}
+			
+			.sumario-html,
+			.sumario-html *{
+			    box-sizing:border-box;
+			    margin:0;
+			    padding:0;
+			}
+			
+			.sumario-html{
+			    position:relative;
+			    width:100%;
+			    height:100%;
+			    min-height:720px;
+			    overflow:hidden;
+			    background:rgba(255,255,255,0) !important;
+			    font-family:'Segoe UI', Arial, sans-serif;
+			    color:" & CorTexto & ";
+			    pointer-events:none;
+			}
+			
+			.sumario-inner{
+			    position:relative;
+			    width:100%;
+			    height:100%;
+			    min-height:720px;
+			    padding:0 58px;
+			    background:rgba(255,255,255,0) !important;
+			}
+			
+			.sumario-head{
+			    height:62px;
+			    display:flex;
+			    align-items:center;
+			    justify-content:space-between;
+			    border-bottom:1px solid " & CorLinha & ";
+			}
+			
+			.sumario-index{
+			    display:flex;
+			    align-items:center;
+			    gap:14px;
+			    font-size:12px;
+			    font-weight:600;
+			    letter-spacing:5px;
+			    text-transform:uppercase;
+			    color:" & CorTextoSuave & ";
+			}
+			
+			.sumario-index::before{
+			    content:'';
+			    width:8px;
+			    height:8px;
+			    border-radius:50%;
+			    background:" & CorDestaque & ";
+			    box-shadow:0 0 0 5px rgba(210,71,122,.08);
+			}
+			
+			.sumario-total{
+			    font-size:11px;
+			    font-weight:600;
+			    letter-spacing:5px;
+			    text-transform:uppercase;
+			    color:" & CorTextoSuave & ";
+			}
+			
+			.sumario-grid{
+			    width:100%;
+			    height:calc(100% - 62px);
+			    min-height:620px;
+			    display:grid;
+			    grid-auto-flow:column;
+			    grid-template-rows:repeat(" & QtdeLinhas & ", minmax(52px, 1fr));
+			    grid-template-columns:repeat(2, minmax(0, 1fr));
+			    column-gap:88px;
+			    row-gap:" & GapLinhas & ";
+			    padding-top:32px;
+			    padding-bottom:10px;
+			    background:rgba(255,255,255,0) !important;
+			}
+			
+			.sum-item{
+			    position:relative;
+			    min-height:58px;
+			    display:grid;
+			    grid-template-columns:92px 1fr 18px;
+			    align-items:center;
+			    border-bottom:1px solid " & CorLinha & ";
+			}
+			
+			.sum-num{
+			    font-family:Georgia, 'Times New Roman', serif;
+			    font-size:28px;
+			    line-height:1;
+			    font-weight:700;
+			    font-style:italic;
+			    color:" & CorMarca & ";
+			    letter-spacing:.5px;
+			}
+			
+			.sum-title{
+			    font-size:24px;
+			    line-height:1.1;
+			    font-weight:600;
+			    color:" & CorTexto & ";
+			    letter-spacing:-.8px;
+			    white-space:nowrap;
+			    overflow:hidden;
+			    text-overflow:ellipsis;
+			}
+			
+			.sum-dot{
+			    width:6px;
+			    height:6px;
+			    border-radius:50%;
+			    justify-self:end;
+			    opacity:.95;
+			}
+			</style>
+			
+			<div class='sumario-html'>
+			    <div class='sumario-inner'>
+			
+			        <div class='sumario-head'>
+			            <div class='sumario-index'>" & RotuloSuperior & " · " & Edicao & " · " & MesAno & "</div>
+			            <div class='sumario-total'>" & FORMAT(TotalItens, "00") & " ABAS</div>
+			        </div>
+			
+			        <div class='sumario-grid'>
+			            " & Item01 & "
+			            " & Item02 & "
+			            " & Item03 & "
+			            " & Item04 & "
+			            " & Item05 & "            
+			        </div>
+			
+			    </div>
+			</div>
+			"
+			```
+		displayFolder: _Razões
+		lineageTag: af7a03ec-8f04-4c74-b883-650dde7ff67f
+
+	column 'Coluna 1'
+		dataType: string
+		lineageTag: 51284dfb-000c-486f-9b67-e6344a75acf2
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dMedidas = m
+		mode: import
+		source =
+				let
+				  Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t])
+				in
+				  Origem
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

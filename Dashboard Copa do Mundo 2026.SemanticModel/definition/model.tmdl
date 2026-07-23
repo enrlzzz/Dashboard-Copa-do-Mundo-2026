@@ -1,0 +1,26 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Fato_Jogos","Fato_Artilheiros","Fato_Premiacoes","Fato_FaseFinal","Aux_Fontes","_KPIs Copa"]
+
+annotation PBI_ProTooling = ["DevMode","MCP-PBIModeling"]
+
+ref table Fato_Artilheiros
+ref table Aux_Fontes
+ref table Fato_FaseFinal
+ref table Fato_Jogos
+ref table Fato_Premiacoes
+ref table '_KPIs Copa'
+ref table Dim_Calendario
+ref table Dim_Selecao
+ref table Dim_Fase
+
+ref cultureInfo pt-BR
+

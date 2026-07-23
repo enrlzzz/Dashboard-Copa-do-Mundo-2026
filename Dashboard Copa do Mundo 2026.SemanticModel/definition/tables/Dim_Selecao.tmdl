@@ -1,0 +1,12 @@
+table Dim_Selecao
+	lineageTag: b9a41261-dbb3-4aee-8231-593a161298a0
+
+	column Seleção
+		lineageTag: fcee2f0d-8f24-44d6-9eaa-b6d333ec041b
+		isNameInferred
+		sourceColumn: [Seleção]
+
+	partition Dim_Selecao = calculated
+		mode: import
+		source = DISTINCT(UNION(SELECTCOLUMNS('Fato_Jogos', "Seleção", 'Fato_Jogos'[Mandante]), SELECTCOLUMNS('Fato_Jogos', "Seleção", 'Fato_Jogos'[Visitante]), SELECTCOLUMNS('Fato_Artilheiros', "Seleção", 'Fato_Artilheiros'[Seleção]), SELECTCOLUMNS('Fato_Premiacoes', "Seleção", 'Fato_Premiacoes'[Seleção])))
+

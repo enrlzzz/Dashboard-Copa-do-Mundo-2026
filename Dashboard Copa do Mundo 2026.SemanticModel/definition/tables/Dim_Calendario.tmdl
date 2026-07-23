@@ -1,0 +1,64 @@
+table Dim_Calendario
+	lineageTag: d9a9b5ef-0c23-4fe9-8a5a-c1e449afc803
+	dataCategory: Time
+
+	column Data
+		isUnique
+		lineageTag: 5f2866fe-4844-4b35-95e0-ea3501a55b7e
+		isNameInferred
+		sourceColumn: [Data]
+
+	column Ano
+		lineageTag: 61d96c60-ce1d-4766-9ed3-c82075914583
+		isNameInferred
+		sourceColumn: [Ano]
+
+	column 'Mês Núm'
+		isHidden
+		lineageTag: d2393cf5-6f41-46f4-b4f5-e6de9cc4f5b0
+		isNameInferred
+		sourceColumn: [Mês Núm]
+
+	column Mês
+		lineageTag: ba852f8d-e857-46a1-afde-a70914df8d69
+		isNameInferred
+		sourceColumn: [Mês]
+		sortByColumn: 'Mês Núm'
+
+	column 'Mês Ano'
+		lineageTag: 9498a902-fe36-467c-ab87-32c6e00ed3a6
+		isNameInferred
+		sourceColumn: [Mês Ano]
+		sortByColumn: 'Mês Núm'
+
+	column Trimestre
+		lineageTag: 788efaca-ef52-4f3d-a869-2d66778a9e16
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+	column Dia
+		lineageTag: b1b59b8b-1955-44ee-a6d6-28b0ab0e77f8
+		isNameInferred
+		sourceColumn: [Dia]
+
+	column 'Dia Semana Núm'
+		isHidden
+		lineageTag: 8810e51d-a948-4c75-a0cc-b997140e47dc
+		isNameInferred
+		sourceColumn: [Dia Semana Núm]
+
+	column 'Dia Semana'
+		lineageTag: 3229241f-feb6-4256-ace2-e34781342e13
+		isNameInferred
+		sourceColumn: [Dia Semana]
+		sortByColumn: 'Dia Semana Núm'
+
+	column 'Semana ISO'
+		lineageTag: 37ffe1e2-7d12-410c-ac77-4e284eec65f8
+		isNameInferred
+		sourceColumn: [Semana ISO]
+
+	partition Dim_Calendario = calculated
+		mode: import
+		source = VAR _min = DATE(YEAR(MIN('Fato_Jogos'[Data])), 1, 1) VAR _max = DATE(YEAR(MAX('Fato_Jogos'[Data])), 12, 31) VAR _base = SELECTCOLUMNS(CALENDAR(_min, _max), "Data", [Date]) RETURN ADDCOLUMNS(_base, "Ano", YEAR([Data]), "Mês Núm", MONTH([Data]), "Mês", FORMAT([Data], "mmm", "pt-BR"), "Mês Ano", FORMAT([Data], "mmm/yyyy", "pt-BR"), "Trimestre", "T" & FORMAT([Data], "Q"), "Dia", DAY([Data]), "Dia Semana Núm", WEEKDAY([Data], 2), "Dia Semana", FORMAT([Data], "ddd", "pt-BR"), "Semana ISO", WEEKNUM([Data], 21))
+

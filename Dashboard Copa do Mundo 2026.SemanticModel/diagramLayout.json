@@ -1,0 +1,139 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 194.71915760741672,
+        "y": 161.9861594641352
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 328.14709170136257,
+            "y": 331.82333708769693
+          },
+          "nodeIndex": "_KPIs Copa",
+          "nodeLineageTag": "de95ca4e-9815-44b4-b301-c35ca2e5d50a",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 327.49599613836892,
+            "y": 469.89045041567033
+          },
+          "nodeIndex": "Aux_Fontes",
+          "nodeLineageTag": "31173e90-c90f-4a7a-9e66-2f1c09e37434",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1645.6709153124575,
+            "y": 818.27667900243273
+          },
+          "nodeIndex": "Fato_Artilheiros",
+          "nodeLineageTag": "fb3ee469-164b-4d5a-9738-2a46576efaec",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1386.3100176991427,
+            "y": 817.26823534461687
+          },
+          "nodeIndex": "Fato_FaseFinal",
+          "nodeLineageTag": "6b262324-510b-405d-87fe-538e57d7c83e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 830.91621732367173,
+            "y": 823.72201319390638
+          },
+          "nodeIndex": "Fato_Jogos",
+          "nodeLineageTag": "5c2b6c35-d10e-44a9-a29f-f0dc8d9fd0fa",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1094.7308927862759,
+            "y": 821.36912330385383
+          },
+          "nodeIndex": "Fato_Premiacoes",
+          "nodeLineageTag": "10cfc1c3-2e32-4834-98a6-6dd5c087b227",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 842.1939861624885,
+            "y": 229.36955923840745
+          },
+          "nodeIndex": "Dim_Calendario",
+          "nodeLineageTag": "d9a9b5ef-0c23-4fe9-8a5a-c1e449afc803",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1119.5133193885545,
+            "y": 218.74778010190764
+          },
+          "nodeIndex": "Dim_Fase",
+          "nodeLineageTag": "58951ddf-5e66-4ab7-ae63-9fa720e2c867",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1376.7906522928176,
+            "y": 217.01666934835495
+          },
+          "nodeIndex": "Dim_Selecao",
+          "nodeLineageTag": "b9a41261-dbb3-4aee-8231-593a161298a0",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 70.955543900968863,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

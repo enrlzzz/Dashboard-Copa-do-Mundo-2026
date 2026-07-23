@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "b8d03e34526eb4d74202",
+  "position": {
+    "x": 0,
+    "y": 172.34645669291336,
+    "z": 0,
+    "height": 842.0787401574803,
+    "width": 1920,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "htmlContent443BE3AD55E043BF878BED274D3A6865",
+    "query": {
+      "queryState": {
+        "content": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_KPIs Copa"
+                    }
+                  },
+                  "Property": "HTML_Sumario_Dinamico"
+                }
+              },
+              "queryRef": "_KPIs Copa.HTML_Sumario_Dinamico",
+              "nativeQueryRef": "HTML_Sumario_Dinamico"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

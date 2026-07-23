@@ -1,0 +1,116 @@
+table Fato_Jogos
+	lineageTag: 5c2b6c35-d10e-44a9-a29f-f0dc8d9fd0fa
+
+	column 'ID DO JOGO'
+		dataType: int64
+		formatString: 0
+		lineageTag: 98041d5f-bf06-4bb7-934e-73cba58a2520
+		summarizeBy: sum
+		sourceColumn: ID DO JOGO
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fase
+		dataType: string
+		lineageTag: 087073aa-9d92-4016-8b0c-33eecbb03977
+		summarizeBy: none
+		sourceColumn: Fase
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba5fc6df-49d2-4e21-aa4c-fcd593cb2b47
+		summarizeBy: none
+		sourceColumn: Data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Local
+		dataType: string
+		lineageTag: 627253aa-b22b-460b-b5a2-9e3e43b4d992
+		summarizeBy: none
+		sourceColumn: Local
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mandante
+		dataType: string
+		lineageTag: b1b9ef21-31ff-4cbf-8154-34480a5e157d
+		summarizeBy: none
+		sourceColumn: Mandante
+
+		annotation SummarizationSetBy = Automatic
+
+	column Visitante
+		dataType: string
+		lineageTag: ff265e0d-c932-4782-9f2a-2894529eb76c
+		summarizeBy: none
+		sourceColumn: Visitante
+
+		annotation SummarizationSetBy = Automatic
+
+	column Placar
+		dataType: string
+		lineageTag: ddf83721-b74a-4a0b-97cb-a5295e036ed4
+		summarizeBy: none
+		sourceColumn: Placar
+
+		annotation SummarizationSetBy = Automatic
+
+	column Vencedor
+		dataType: string
+		lineageTag: ffcf4a0a-9a77-4bb2-97f8-97833515ce55
+		summarizeBy: none
+		sourceColumn: Vencedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grupo
+		dataType: string
+		lineageTag: 0be6ea26-8a99-4476-8240-92880bc9be70
+		summarizeBy: none
+		sourceColumn: Grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Gols do mandante, extraídos do texto Placar (formato 'N x N'). Origem ideal: Power Query.
+	column 'Gols Mandante' = VALUE(TRIM(LEFT('Fato_Jogos'[Placar], SEARCH(" x ", 'Fato_Jogos'[Placar]) - 1)))
+		dataType: int64
+		formatString: 0
+		lineageTag: 62d2fff4-4f6b-4cd2-95cf-d10d4daa5046
+		summarizeBy: sum
+
+	/// Gols do visitante, extraídos do texto Placar (formato 'N x N'). Origem ideal: Power Query.
+	column 'Gols Visitante' = VALUE(TRIM(MID('Fato_Jogos'[Placar], SEARCH(" x ", 'Fato_Jogos'[Placar]) + 3, 10)))
+		dataType: int64
+		formatString: 0
+		lineageTag: 58283153-071f-4385-8045-31856d2ba7f7
+		summarizeBy: sum
+
+	/// Total de gols na partida (mandante + visitante). Não conta pênaltis de desempate.
+	column 'Total de Gols' = 'Fato_Jogos'[Gols Mandante] + 'Fato_Jogos'[Gols Visitante]
+		dataType: int64
+		formatString: 0
+		lineageTag: ee7afc45-8c24-4241-b841-1703f15171a6
+		summarizeBy: sum
+
+	partition 'Todos os Jogos' = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Enrico\Geral\BI\Youtube\Power BI do ZERO ao Dashboard Completo\Aula 01\Copa do Mundo 2026.xlsx"), null, true),
+				    #"Todos os Jogos_Sheet" = Fonte{[Item="Todos os Jogos",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Todos os Jogos_Sheet", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"#", Int64.Type}, {"Fase", type text}, {"Data", type date}, {"Local", type text}, {"Mandante", type text}, {"Visitante", type text}, {"Placar", type text}, {"Vencedor", type text}, {"Grupo", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado",{{"#", "ID DO JOGO"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
